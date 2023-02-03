@@ -1,9 +1,16 @@
 pipeline {
   agent any
+
+  stages('Clone') {
+    steps {
+      checkout scm
+    }
+  }
   stages {
     stage('Docker Compose Up') {
       steps {
         sh 'docker-compose up -d'
+        sh 'docker-compose ps'
       }
     }
     stage('Start files') {
